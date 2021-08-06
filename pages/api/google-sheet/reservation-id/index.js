@@ -7,7 +7,7 @@ const handlerGoogle = async (req, res) => {
 
   const { reservationId } = req.query;
 
-  const { reservation, spreadSheetId, sheetIndex } = req.body;
+  const { reservation } = req.body;
 
   console.log("ORa", reservationId);
   console.log("Data !!! ", reservation);
