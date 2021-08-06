@@ -21,7 +21,7 @@ const handlerGoogle = async (req, res) => {
     day: "numeric",
   };
 
-  return res.status(200).json({ body: req.body, id: id });
+  return res.status(200).json({ body: req.body, id: reservationId });
 
   // if (req.method === "PUT") {
   //   let getReservationById = [];
