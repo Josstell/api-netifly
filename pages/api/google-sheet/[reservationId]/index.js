@@ -1,7 +1,5 @@
 import { callApiGoogleSheet } from "../../../../helpers/index";
 
-const { SPREADSHEET_ID_MARIACHON, SHEET_ID } = process.env;
-
 const handlerGoogle = async (req, res) => {
   const {
     query: { reservationId },
@@ -25,109 +23,111 @@ const handlerGoogle = async (req, res) => {
     day: "numeric",
   };
 
-  if (req.method === "PUT") {
-    let getReservationById = [];
-    try {
-      const { sheetGoogle } = await callApiGoogleSheet(
-        spreadSheetId,
-        sheetIndex
-      );
-      getReservationById = await sheetGoogle.filter(
-        (reser) => reser.reservationId === reservationId
-      );
+  return res.status(200).json({ body: req.body });
 
-      const filteredRow = (await getReservationById[0]._rowNumber) - 2;
+  // if (req.method === "PUT") {
+  //   let getReservationById = [];
+  //   try {
+  //     const { sheetGoogle } = await callApiGoogleSheet(
+  //       spreadSheetId,
+  //       sheetIndex
+  //     );
+  //     getReservationById = await sheetGoogle.filter(
+  //       (reser) => reser.reservationId === reservationId
+  //     );
 
-      if (reservationUpdate.createdAt) {
-        const creado = new Date(reservationUpdate.createdAt);
+  //     const filteredRow = (await getReservationById[0]._rowNumber) - 2;
 
-        sheetGoogle[filteredRow].fecha_creacion = creado.toLocaleDateString(
-          "es-MX",
-          options
-        );
-      }
+  //     if (reservationUpdate.createdAt) {
+  //       const creado = new Date(reservationUpdate.createdAt);
 
-      if (reservationUpdate.reservationId) {
-        sheetGoogle[filteredRow].reservationId =
-          await reservationUpdate.reservationId;
-      }
+  //       sheetGoogle[filteredRow].fecha_creacion = creado.toLocaleDateString(
+  //         "es-MX",
+  //         options
+  //       );
+  //     }
 
-      if (reservationUpdate.date) {
-        const date = new Date(reservationUpdate.date);
+  //     if (reservationUpdate.reservationId) {
+  //       sheetGoogle[filteredRow].reservationId =
+  //         await reservationUpdate.reservationId;
+  //     }
 
-        sheetGoogle[filteredRow].fecha_y_hora = `${date.toLocaleDateString(
-          "es-MX",
-          options
-        )} , ${date.toLocaleTimeString()}`;
-      }
+  //     if (reservationUpdate.date) {
+  //       const date = new Date(reservationUpdate.date);
 
-      if (reservationUpdate.mariachiData.nameMariachi) {
-        sheetGoogle[filteredRow].mariachi = await reservationUpdate.mariachiData
-          .nameMariachi;
-      }
+  //       sheetGoogle[filteredRow].fecha_y_hora = `${date.toLocaleDateString(
+  //         "es-MX",
+  //         options
+  //       )} , ${date.toLocaleTimeString()}`;
+  //     }
 
-      if (reservationUpdate.address) {
-        sheetGoogle[filteredRow].direccion = await reservationUpdate.address;
-      }
+  //     if (reservationUpdate.mariachiData.nameMariachi) {
+  //       sheetGoogle[filteredRow].mariachi = await reservationUpdate.mariachiData
+  //         .nameMariachi;
+  //     }
 
-      if (reservationUpdate.client.nameClient) {
-        sheetGoogle[filteredRow].cliente = await reservationUpdate.client
-          .nameClient;
-      }
+  //     if (reservationUpdate.address) {
+  //       sheetGoogle[filteredRow].direccion = await reservationUpdate.address;
+  //     }
 
-      if (reservationUpdate.client.phone) {
-        sheetGoogle[filteredRow].tel = await reservationUpdate.client.phone;
-      }
+  //     if (reservationUpdate.client.nameClient) {
+  //       sheetGoogle[filteredRow].cliente = await reservationUpdate.client
+  //         .nameClient;
+  //     }
 
-      if (reservationUpdate.client.email) {
-        sheetGoogle[filteredRow].email = await reservationUpdate.client.email;
-      }
+  //     if (reservationUpdate.client.phone) {
+  //       sheetGoogle[filteredRow].tel = await reservationUpdate.client.phone;
+  //     }
 
-      if (reservationUpdate.service) {
-        sheetGoogle[filteredRow].servicio = await reservationUpdate.service;
-      }
+  //     if (reservationUpdate.client.email) {
+  //       sheetGoogle[filteredRow].email = await reservationUpdate.client.email;
+  //     }
 
-      if (reservationUpdate.qty) {
-        sheetGoogle[filteredRow].cantidad = await reservationUpdate.qty;
-      }
+  //     if (reservationUpdate.service) {
+  //       sheetGoogle[filteredRow].servicio = await reservationUpdate.service;
+  //     }
 
-      if (reservationUpdate.price) {
-        sheetGoogle[filteredRow].precio = await (reservationUpdate.price *
-          reservationUpdate.qty);
-      }
+  //     if (reservationUpdate.qty) {
+  //       sheetGoogle[filteredRow].cantidad = await reservationUpdate.qty;
+  //     }
 
-      if (reservationUpdate.deposit) {
-        sheetGoogle[filteredRow].deposito = await reservationUpdate.deposit;
-      }
+  //     if (reservationUpdate.price) {
+  //       sheetGoogle[filteredRow].precio = await (reservationUpdate.price *
+  //         reservationUpdate.qty);
+  //     }
 
-      if (reservationUpdate.message) {
-        sheetGoogle[filteredRow].mensaje = await reservationUpdate.message;
-      }
+  //     if (reservationUpdate.deposit) {
+  //       sheetGoogle[filteredRow].deposito = await reservationUpdate.deposit;
+  //     }
 
-      if (reservationUpdate.playlist) {
-        sheetGoogle[filteredRow].Lista_de_canciones =
-          await reservationUpdate.playlist;
-      }
+  //     if (reservationUpdate.message) {
+  //       sheetGoogle[filteredRow].mensaje = await reservationUpdate.message;
+  //     }
 
-      if (reservationUpdate.status) {
-        sheetGoogle[filteredRow].status = await reservationUpdate.status;
-      }
+  //     if (reservationUpdate.playlist) {
+  //       sheetGoogle[filteredRow].Lista_de_canciones =
+  //         await reservationUpdate.playlist;
+  //     }
 
-      if (reservationUpdate.coordinatorData.userName) {
-        sheetGoogle[filteredRow].coordinator = await reservationUpdate
-          .coordinatorData.userName;
-      }
-      await sheetGoogle[filteredRow].save();
+  //     if (reservationUpdate.status) {
+  //       sheetGoogle[filteredRow].status = await reservationUpdate.status;
+  //     }
 
-      res.status(200).json({
-        message: `Reservación ${reservationId} actualizada correntamente en google sheet`,
-      });
-    } catch (err) {
-      res.status(400).json({
-        error: err.message,
-      });
-    }
-  }
+  //     if (reservationUpdate.coordinatorData.userName) {
+  //       sheetGoogle[filteredRow].coordinator = await reservationUpdate
+  //         .coordinatorData.userName;
+  //     }
+  //     await sheetGoogle[filteredRow].save();
+
+  //     res.status(200).json({
+  //       message: `Reservación ${reservationId} actualizada correntamente en google sheet`,
+  //     });
+  //   } catch (err) {
+  //     res.status(400).json({
+  //       error: err.message,
+  //     });
+  //   }
+  // }
 };
 
 module.exports = handlerGoogle;
