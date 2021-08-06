@@ -11,10 +11,12 @@ const handlerGoogle = async (req, res) => {
 
   const { reservation, spreadSheetId, sheetIndex } = req.body;
 
-  console.log("ORa", reservationId);
-  console.log("Data !!! ", reservation);
+  console.log("hello... ");
 
-  const reservationUpdate = reservation;
+  // console.log("ORa", reservationId);
+  // console.log("Data !!! ", reservation);
+
+  // const reservationUpdate = reservation;
 
   const options = {
     weekday: "long",
