@@ -5,9 +5,11 @@ const handlerGoogle = async (req, res) => {
     return res.status(400).json({ error: "Method not allowed" });
   }
 
+  const { id } = req.query;
+
   const { reservation, spreadSheetId, sheetIndex } = req.body;
 
-  console.log("hello... ");
+  console.log("hello... ", id);
 
   // console.log("ORa", reservationId);
   // console.log("Data !!! ", reservation);
@@ -21,7 +23,7 @@ const handlerGoogle = async (req, res) => {
     day: "numeric",
   };
 
-  return res.status(200).json({ body: req.body });
+  return res.status(200).json({ body: req.body, id: id });
 
   // if (req.method === "PUT") {
   //   let getReservationById = [];
