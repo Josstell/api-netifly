@@ -7,7 +7,7 @@ const handlerGoogle = async (req, res) => {
 
   const { reservationId } = req.query;
 
-  const { reservation } = req.body;
+  const { reservation, spreadSheetId, sheetIndex } = req.body;
 
   console.log("ORa", reservationId);
   console.log("Data !!! ", reservation);
@@ -20,8 +20,6 @@ const handlerGoogle = async (req, res) => {
     month: "long",
     day: "numeric",
   };
-
-  return res.status(200).json({ body: req.body, id: reservationId });
 
   // if (req.method === "PUT") {
   //   let getReservationById = [];
