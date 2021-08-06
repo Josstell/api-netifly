@@ -1,10 +1,6 @@
-import { callApiGoogleSheet } from "../../../../helpers/index";
+//import { callApiGoogleSheet } from "../../../../helpers/index";
 
 const handlerGoogle = async (req, res) => {
-  const {
-    query: { reservationId },
-  } = req;
-
   if (req.method !== "PUT") {
     return res.status(400).json({ error: "Method not allowed" });
   }
