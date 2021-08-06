@@ -5,16 +5,14 @@ const handlerGoogle = async (req, res) => {
     return res.status(400).json({ error: "Method not allowed" });
   }
 
-  const { id } = req.query;
+  const { reservationId } = req.query;
 
   const { reservation, spreadSheetId, sheetIndex } = req.body;
 
-  console.log("hello... ", id);
+  console.log("ORa", reservationId);
+  console.log("Data !!! ", reservation);
 
-  // console.log("ORa", reservationId);
-  // console.log("Data !!! ", reservation);
-
-  // const reservationUpdate = reservation;
+  const reservationUpdate = reservation;
 
   const options = {
     weekday: "long",
