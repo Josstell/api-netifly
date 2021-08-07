@@ -7,12 +7,13 @@ import handler from "../../../../handler/index";
 export default handler
   .put(async (req, res) => {
     const { reservationid } = req.query;
-    const reservationId = reservationid;
+    const { reservationId, spreadSheetId, sheetIndex } = reservationid;
 
     const reservation = req.body;
 
     console.log("ORa", reservationid);
-    console.log("Data !!! ", reservation);
+    console.log("Data !!! ", spreadSheetId);
+    console.log(sheetIndex);
 
     const options = {
       weekday: "long",
@@ -24,7 +25,10 @@ export default handler
     // res.status(200).json({ body: reservation, id: reservationid });
     let getReservationById = [];
     try {
-      const { sheetGoogle } = await callApiGoogleSheet();
+      const { sheetGoogle } = await callApiGoogleSheet(
+        spreadSheetId,
+        sheetIndex
+      );
       getReservationById = await sheetGoogle.filter(
         (res) => res.reservationId === reservationId
       );
@@ -118,6 +122,7 @@ export default handler
     } catch (err) {
       res.status(400).json({
         error: err.message,
+        error2: Error("hola"),
       });
     }
   })
