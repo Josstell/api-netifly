@@ -1,4 +1,4 @@
-//import { callApiGoogleSheet } from "../../../../helpers/index";
+import { callApiGoogleSheet } from "../../../../helpers/index";
 
 //import { cors, runMiddleware } from "../../../../helpers/index";
 
@@ -35,6 +35,7 @@ export default handler
         spreadSheetId,
         sheetIndex
       );
+
       getReservationById = await sheetGoogle.filter(
         (res) => res.reservationId === reservationId
       );
