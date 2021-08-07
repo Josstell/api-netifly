@@ -8,11 +8,14 @@ export default handler
   .put(async (req, res) => {
     const { reservationid } = req.query;
 
-    const { reservationId, spreadSheetId, sheetIndex } = req.body;
+    const { reservation, spreadSheetId, sheetIndex } = req.body;
+
+    const reservationUpdate = reservation;
 
     console.log("ORa", reservationid);
     console.log("Data !!! ", spreadSheetId);
     console.log(sheetIndex);
+    console.log(reservationUpdate);
 
     const options = {
       weekday: "long",
