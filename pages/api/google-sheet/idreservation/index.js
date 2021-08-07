@@ -7,9 +7,8 @@ import handler from "../../../../handler/index";
 export default handler
   .put(async (req, res) => {
     const { reservationid } = req.query;
-    const { reservationId, spreadSheetId, sheetIndex } = reservationid;
 
-    const reservation = req.body;
+    const { reservationId, spreadSheetId, sheetIndex } = req.body;
 
     console.log("ORa", reservationid);
     console.log("Data !!! ", spreadSheetId);
