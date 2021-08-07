@@ -60,7 +60,6 @@ export default handler
     } catch (err) {
       res.status(400).json({
         error: err.message,
-        error2: Error("hola"),
       });
     }
   })
