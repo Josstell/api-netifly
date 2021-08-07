@@ -35,6 +35,8 @@ export default handler
         (res) => res.reservationId === reservationId
       );
 
+      console.log(getReservationById);
+
       const filteredRow = (await getReservationById[0]._rowNumber) - 2;
 
       if (reservationUpdate.createdAt) {
@@ -46,76 +48,10 @@ export default handler
         );
       }
 
-      if (reservationUpdate.reservationId) {
-        sheetGoogle[filteredRow].reservationId =
-          await reservationUpdate.reservationId;
-      }
-
-      if (reservationUpdate.date) {
-        const date = new Date(reservationUpdate.date);
-
-        sheetGoogle[filteredRow].fecha_y_hora =
-          date.toLocaleDateString("es-MX", options) +
-          ", " +
-          date.toLocaleTimeString();
-      }
-
-      if (reservationUpdate.mariachiData.nameMariachi) {
-        sheetGoogle[filteredRow].mariachi = await reservationUpdate.mariachiData
-          .nameMariachi;
-      }
-
-      if (reservationUpdate.address) {
-        sheetGoogle[filteredRow].direccion = await reservationUpdate.address;
-      }
-
-      if (reservationUpdate.client.nameClient) {
-        sheetGoogle[filteredRow].cliente = await reservationUpdate.client
-          .nameClient;
-      }
-
-      if (reservationUpdate.client.phone) {
-        sheetGoogle[filteredRow].tel = await reservationUpdate.client.phone;
-      }
-
-      if (reservationUpdate.client.email) {
-        sheetGoogle[filteredRow].email = await reservationUpdate.client.email;
-      }
-
-      if (reservationUpdate.service) {
-        sheetGoogle[filteredRow].servicio = await reservationUpdate.service;
-      }
-
-      if (reservationUpdate.qty) {
-        sheetGoogle[filteredRow].cantidad = await reservationUpdate.qty;
-      }
-
-      if (reservationUpdate.price) {
-        sheetGoogle[filteredRow].precio = await (reservationUpdate.price *
-          reservationUpdate.qty);
-      }
-
-      if (reservationUpdate.deposit) {
-        sheetGoogle[filteredRow].deposito = await reservationUpdate.deposit;
-      }
-
-      if (reservationUpdate.message) {
-        sheetGoogle[filteredRow].mensaje = await reservationUpdate.message;
-      }
-
-      if (reservationUpdate.playlist) {
-        sheetGoogle[filteredRow].Lista_de_canciones =
-          await reservationUpdate.playlist;
-      }
-
       if (reservationUpdate.status) {
         sheetGoogle[filteredRow].status = await reservationUpdate.status;
       }
 
-      if (reservationUpdate.coordinatorData.userName) {
-        sheetGoogle[filteredRow].coordinator = await reservationUpdate
-          .coordinatorData.userName;
-      }
       await sheetGoogle[filteredRow].save();
 
       res.status(200).json({
