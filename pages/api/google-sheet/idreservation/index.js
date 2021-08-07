@@ -24,9 +24,13 @@ export default handler
       day: "numeric",
     };
 
+    console.log("Hola ", options);
+
     // res.status(200).json({ body: reservation, id: reservationid });
     let getReservationById = [];
     try {
+      console.log("Hola tryr", getReservationById);
+
       const { sheetGoogle } = await callApiGoogleSheet(
         spreadSheetId,
         sheetIndex
