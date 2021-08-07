@@ -28,45 +28,45 @@ export default handler
 
     // res.status(200).json({ body: reservation, id: reservationid });
     let getReservationById = [];
-    try {
-      console.log("Hola tryr", getReservationById);
+    // try {
+    //   console.log("Hola tryr", getReservationById);
 
-      const { sheetGoogle } = await callApiGoogleSheet(
-        spreadSheetId,
-        sheetIndex
-      );
+    //   const { sheetGoogle } = await callApiGoogleSheet(
+    //     spreadSheetId,
+    //     sheetIndex
+    //   );
 
-      getReservationById = await sheetGoogle.filter(
-        (res) => res.reservationId === reservationId
-      );
+    //   getReservationById = await sheetGoogle.filter(
+    //     (res) => res.reservationId === reservationId
+    //   );
 
-      console.log(getReservationById);
+    //   console.log(getReservationById);
 
-      const filteredRow = (await getReservationById[0]._rowNumber) - 2;
+    //   const filteredRow = (await getReservationById[0]._rowNumber) - 2;
 
-      if (reservationUpdate.createdAt) {
-        const creado = new Date(reservationUpdate.createdAt);
+    //   if (reservationUpdate.createdAt) {
+    //     const creado = new Date(reservationUpdate.createdAt);
 
-        sheetGoogle[filteredRow].fecha_creacion = creado.toLocaleDateString(
-          "es-MX",
-          options
-        );
-      }
+    //     sheetGoogle[filteredRow].fecha_creacion = creado.toLocaleDateString(
+    //       "es-MX",
+    //       options
+    //     );
+    //   }
 
-      if (reservationUpdate.status) {
-        sheetGoogle[filteredRow].status = await reservationUpdate.status;
-      }
+    //   if (reservationUpdate.status) {
+    //     sheetGoogle[filteredRow].status = await reservationUpdate.status;
+    //   }
 
-      await sheetGoogle[filteredRow].save();
+    //   await sheetGoogle[filteredRow].save();
 
-      res.status(200).json({
-        message: `Reservación ${reservationId} actualizada correntamente en google sheet`,
-      });
-    } catch (err) {
-      res.status(400).json({
-        error: err.message,
-      });
-    }
+    //   res.status(200).json({
+    //     message: `Reservación ${reservationId} actualizada correntamente en google sheet`,
+    //   });
+    // } catch (err) {
+    //   res.status(400).json({
+    //     error: err.message,
+    //   });
+    // }
   })
   .post((req, res) => {
     throw new Error("upss something happened! Sorry!");
