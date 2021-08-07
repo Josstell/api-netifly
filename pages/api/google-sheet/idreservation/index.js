@@ -1,9 +1,9 @@
 //import { callApiGoogleSheet } from "../../../../helpers/index";
 
-import { cors, runMiddleware } from "../../../../helpers/index";
+//import { cors, runMiddleware } from "../../../../helpers/index";
 
 const handlerGoogle = async (req, res) => {
-  await runMiddleware(req, res, cors);
+  // await runMiddleware(req, res, cors);
 
   if (req.method !== "PUT") {
     return res.status(400).json({ error: "Method not allowed" });
