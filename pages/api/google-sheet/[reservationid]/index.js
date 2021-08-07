@@ -1,15 +1,19 @@
 //import { callApiGoogleSheet } from "../../../../helpers/index";
 
+import { cors, runMiddleware } from "../../../../helpers/index";
+
 const handlerGoogle = async (req, res) => {
+  await runMiddleware(req, res, cors);
+
   if (req.method !== "PUT") {
     return res.status(400).json({ error: "Method not allowed" });
   }
 
-  const { reservationId } = req.query;
+  const { reservationid } = req.query;
 
-  const { reservation, spreadSheetId, sheetIndex } = req.body;
+  const reservation = req.body;
 
-  console.log("ORa", reservationId);
+  console.log("ORa", reservationid);
   console.log("Data !!! ", reservation);
 
   const reservationUpdate = reservation;
@@ -21,7 +25,7 @@ const handlerGoogle = async (req, res) => {
     day: "numeric",
   };
 
-  res.status(200).json({ body: reservation, id: reservationId });
+  res.status(200).json({ body: reservation, id: reservationid });
 
   // if (req.method === "PUT") {
   //   let getReservationById = [];
