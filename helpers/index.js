@@ -29,15 +29,18 @@ export function runMiddleware(req, res, fn) {
 const credsEnv = process.env.NEXT_PUBLIC_GOOGLE_SHEET;
 const creds = JSON.parse(credsEnv);
 
-// const { SPREADSHEET_ID } = process.env
-// const { SHEET_ID } = process.env
+//const { NEXT_PUBLIC_SPREADSHEET_ID_MARIACHON } = process.env;
+//const { NEXT_PUBLIC_SHEET_ID } = process.env;
 
-export const callApiGoogleSheet = async (SPREADSHEET_ID, SHEET_ID) => {
-  const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
+export const callApiGoogleSheet = async (
+  NEXT_PUBLIC_SPREADSHEET_ID_MARIACHON,
+  NEXT_PUBLIC_SHEET_ID
+) => {
+  const doc = new GoogleSpreadsheet(NEXT_PUBLIC_SPREADSHEET_ID_MARIACHON);
 
   await doc.useServiceAccountAuth(creds);
   await doc.loadInfo();
-  const sheet = doc.sheetsById[SHEET_ID];
+  const sheet = doc.sheetsById[NEXT_PUBLIC_SHEET_ID];
   const sheetGoogle = await sheet.getRows();
   return { sheetGoogle, sheet };
 };
