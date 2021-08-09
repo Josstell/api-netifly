@@ -14,12 +14,17 @@ export default handler
       NEXT_PUBLIC_SHEET_ID,
     } = req.body;
 
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+
     const reservationUpdate = reservation;
 
     if (req.userName === "Juan Tellez") {
       try {
-        console.log("Datos: ", reservationUpdate);
-
         const { sheetGoogle } = await callApiGoogleSheet(
           NEXT_PUBLIC_SPREADSHEET_ID_MARIACHON,
           NEXT_PUBLIC_SHEET_ID
