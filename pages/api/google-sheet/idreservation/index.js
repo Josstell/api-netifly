@@ -21,7 +21,6 @@ export default handler
     if (req.userName === "Juan Tellez") {
       console.log("Hola tryr :", req.userId);
       try {
-        console.log("Hola tryr :", req.userId);
         const { sheetGoogle } = await callApiGoogleSheet(
           NEXT_PUBLIC_SPREADSHEET_ID_MARIACHON,
           NEXT_PUBLIC_SHEET_ID
@@ -47,7 +46,9 @@ export default handler
       }
     } else {
       res.status(201).json({
-        message: "Usted no tiene autorización de hacer esta operación.",
+        message: "Usted no tiene autorización de hacer esta operación .",
+        name: req.userName,
+        userId: req.userId,
       });
     }
   })
