@@ -1,31 +1,31 @@
 import { callApiGoogleSheet } from "../../../../helpers/index";
 
-const { SPREADSHEET_ID_MARIACHON, SHEET_ID } = process.env;
+import handler from "../../../../handler/index";
 
-const handlerGoogle = async (req, res) => {
-  if (req.method !== "POST") {
-    return res.status(400).json({ error: "Method not allowed" });
-  }
+export default handler
+  .post(async (req, res) => {
+    const {
+      reservation,
+      NEXT_PUBLIC_SPREADSHEET_ID_MARIACHON,
+      NEXT_PUBLIC_SHEET_ID,
+    } = req.body;
 
-  const { reservation, spreadSheetId, sheetIndex } = req.body;
+    const reservationUpdate = reservation;
 
-  const reservationUpdate = reservation;
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
 
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
+    const date = new Date(reservationUpdate.date);
+    const creado = new Date(reservationUpdate.createdAt);
 
-  const date = new Date(reservationUpdate.date);
-  const creado = new Date(reservationUpdate.createdAt);
-
-  if (req.method === "POST") {
     try {
       const { sheet } = await callApiGoogleSheet(
-        SPREADSHEET_ID_MARIACHON,
-        SHEET_ID
+        NEXT_PUBLIC_SPREADSHEET_ID_MARIACHON,
+        NEXT_PUBLIC_SHEET_ID
       );
 
       const reservationDetails = {
@@ -58,7 +58,10 @@ const handlerGoogle = async (req, res) => {
         error: err.message,
       });
     }
-  }
-};
-
-module.exports = handlerGoogle;
+  })
+  .put((req, res) => {
+    throw new Error("upss something happened! Sorry!");
+  })
+  .get((req, res) => {
+    throw new Error("upss something happened! Sorry!");
+  });

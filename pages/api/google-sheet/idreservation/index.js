@@ -16,10 +16,7 @@ export default handler
 
     const reservationUpdate = reservation;
 
-    console.log("ORa", reservationid);
-
     if (req.userName === "Juan Tellez") {
-      console.log("Hola tryr :", req.userId);
       try {
         const { sheetGoogle } = await callApiGoogleSheet(
           NEXT_PUBLIC_SPREADSHEET_ID_MARIACHON,
